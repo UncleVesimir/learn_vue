@@ -14,6 +14,13 @@
       display: block;
       width: 30vw
     }
+
+    .box {
+      background: grey;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
   </style>
 </head>
 
@@ -21,19 +28,23 @@
   <h1>Hello, Vue Turkey!</h1>
   <div id="app">
     <div v-if="showBooks">
-      <h2>The book is called...</h2>
-      <p>{{title}} by {{author}}, age {{age}}</p>
-      <button @click="age++">Age +1</button>
-      <button @click="age--">Age -1</button>
+      <div v-for="book in books">
+        <h3>{{book.title}}</h3>
+        <p>{{book.author}}</p>
+      </div>
+      <div :href="number"></div>
     </div>
     <button v-if="!showBooks" @click="toggleShowBooks()">Show Books</button>
     <button v-else @click="toggleShowBooks()">Hide Books</button>
     <div v-show="showBooks">Currently Showing Books</div>
-    <div v-if="number > 0.5">
-      <p>The answer is: {{number}}</p>
-    </div>
-    <div class="btn" @click="changeAnswer()">Feeling lucky?</div>
-    <script src="app.js"></script>
+
+    <div class="box" @mouseover="handleEvent">mouseover</div>
+    <div class="box" @mouseleave="handleEvent">mouseleave</div>
+    <div class="box" @dblclick="handleEvent">double click</div>
+    <div class="box" @mousemove="handleMouseMove">Position - x: {{x}}, y:{{y}}</div>
+
+  </div>
+  <script src="app.js"></script>
 </body>
 
 </html>
