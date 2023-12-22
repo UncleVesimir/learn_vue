@@ -9,9 +9,9 @@ const app = Vue.createApp({
       x: 0,
       y: 0,
       books: [
-        { title: "Way of Kings", author: "Brandon Sanderson" },
-        { title: "Oathbringer", author: "Brandson Sanderson" },
-        { title: "Brave New World", author: "Auldus Hucksley" }
+        { title: "Way of Kings", author: "Brandon Sanderson", isFav: true },
+        { title: "Oathbringer", author: "Brandson Sanderson", isFav: false },
+        { title: "Brave New World", author: "Auldus Hucksley", isFav: false }
       ]
     }
   },
@@ -28,6 +28,14 @@ const app = Vue.createApp({
     handleMouseMove(e) {
       this.x = e.offsetX;
       this.y = e.offsetY;
+    },
+    toggleFav(book) {
+      book.isFav = !book.isFav;
+    }
+  },
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => book.isFav);
     }
   }
 });

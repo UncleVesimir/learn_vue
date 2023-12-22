@@ -21,16 +21,45 @@
       border: 1px solid black;
       border-radius: 10px;
     }
+
+    .book-box {
+      display: flex;
+      flex-direction: row;
+      column-gap: 5px;
+      width: 65%;
+      align-items: center;
+      border-radius: 15px;
+      padding: 10px;
+      justify-content: space-between;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      transition: background-color 0.2s ease;
+    }
+
+    .books-container {
+      width: 80vw;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      row-gap: 10px;
+      column-gap: 10px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .fav {
+      background-color: bisque;
+    }
   </style>
 </head>
 
 <body>
   <h1>Hello, Vue Turkey!</h1>
   <div id="app">
-    <div v-if="showBooks">
-      <div v-for="book in books">
+    <div class="books-container" v-if="showBooks">
+      <div class="book-box" :class="{fav: book.isFav}" v-for="book in books" @click="toggleFav(book)">
         <h3>{{book.title}}</h3>
         <p>{{book.author}}</p>
+        <img :src="img_url" alt="something">
       </div>
       <div :href="number"></div>
     </div>
