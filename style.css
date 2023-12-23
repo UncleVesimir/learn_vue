@@ -2,8 +2,8 @@
       --message-color: #ffffff;
       --input-placeholder-color: grey;
       --user-text-color: #ac38fa;
-      --bg-color: #ffffff
-      --chat-bubble-bg: linear-gradient(270deg,#7330ed,#ac38fa)
+      --bg-color: #ffffff;
+      --chat-bubble-bg: linear-gradient(270deg,#7330ed,#ac38fa);
       --user-chat-bubble-bg: #ffffff;
 
     }
