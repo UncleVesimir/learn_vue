@@ -1,53 +1,32 @@
 <template>
-  <h1>{{ title }}</h1>
-  <br>
-  <div v-show="showModal">
-    <ModalWindow :theme="theme" @close="toggleModal('showModal')">
-      <template v-slot:links>
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-      </template>
-      <h1>Crazy Giveaway!</h1>
-      <p>Grab your craazzzy swag bro!</p>
-    </ModalWindow>
-  </div>
-  <div v-show="showModal2">
-    <ModalWindow :theme="null" @close="toggleModal('showModal2')">
-      <template v-slot:links>
-        <a href="#">Dutty Link 1</a>
-        <a href="#">Dutty Link 2</a>
-      </template>
-      <h1>Shitty Giveaway</h1>
-      <p>Don't click it..</p>
-    </ModalWindow>
-  </div>
-  <button v-show="!showModal" @click="toggleModal('showModal')">Show Modal</button>
-  <button v-show="showModal" @click="toggleModal('showModal')">Hide Modal</button>
-  <button v-show="!showModal2" @click="toggleModal('showModal2')">Show Modal2</button>
-  <button v-show="showModal2" @click="toggleModal('showModal2')">Hide Modal2</button>
+  <h1>Welcome to The Reaction Game</h1>
+  <button @click="start" :disabled="isPlaying">Play</button>
+  <ReactionBlock v-if="isPlaying" :delay="delay" @stopGame="handleStopGame"/>
+  <ResultsDisplay v-if="showResults" :result="playerResult" />
 </template>
 
 <script setup>
-  import ModalWindow from './components/ModalWindow.vue'
-  import { ref } from 'vue';
+import { ref } from 'vue';
+import ReactionBlock from './components/ReactionBlock.vue';
+import ResultsDisplay from './components/ResultsDisplay.vue';
 
-  const title = "Got-eem!"
-  // const modal_header = 'Sign up For the Bacon Butties!'
-  // const modal_text = 'Deez Nuts'
-  const theme = 'sale'
-  let showModal = ref(false)
-  let showModal2 = ref(false);
+let isPlaying = ref(false)
+let showResults = ref(false)
+let delay = null
+let playerResult = null;
 
-  let modalObj = {
-    showModal,
-    showModal2
-  }
+function start () {
+  showResults.value = false;
+  playerResult = null;
+  delay = 2000 + Math.random() * 5000;
+  isPlaying.value = true
+}
 
-  function toggleModal(modalString) {
-    let ref = modalObj[modalString];
-    ref.value = !ref.value;
-  }
-
+const handleStopGame = ([reactionTime]) => {
+  playerResult = reactionTime;
+  isPlaying.value = false;
+  showResults.value = true;
+}
 </script>
 
 <style>
@@ -60,12 +39,5 @@
     margin-top: 60px;
     width: 100vw;
     height: 100vh;
-  }
-  body {
-    background: white;
-    padding: 0;
-  }
-  h1 {
-    color: black;
   }
 </style>
