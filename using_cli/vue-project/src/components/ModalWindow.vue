@@ -1,18 +1,23 @@
 <template>
-  <div class="backdrop">
-    <div class="modal" :class="{ sale: theme === sale }">
-      <h1>{{ header }}</h1>
-      <p>{{ text }}</p>
+  <div class="backdrop" @click.self="closeModal">
+    <div class="modal" :class="{ sale: props.theme === 'sale' }">
+      <slot/>
+      <slot name="links" />
     </div>
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  header: '',
-  text: '',
-  theme: ''
-})
+<script lang="ts" setup>
+  
+  const props = defineProps({
+    theme: String,
+  });
+
+  const emit = defineEmits(['close'])
+
+  function closeModal(){
+    emit("close");
+  }
 </script>
 
 <style scoped>
