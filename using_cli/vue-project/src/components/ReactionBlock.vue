@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emits = defineEmits(["stopGame"]);
 
-const startTimer =() => {
+const startTimer = () => {
     timer = setInterval(() => {
         reactionTime += 10
     }, 10);
@@ -47,5 +47,4 @@ const handleClick = () => {
     padding: 100px 0;
     margin: 40px auto;
 }
-    
 </style>
