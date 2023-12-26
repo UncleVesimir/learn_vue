@@ -1,32 +1,10 @@
 <template>
-  <h1>Welcome to The Reaction Game</h1>
-  <button @click="start" :disabled="isPlaying">Play</button>
-  <ReactionBlock v-if="isPlaying" :delay="delay" @stopGame="handleStopGame"/>
-  <ResultsDisplay v-if="showResults" :result="playerResult" />
+  <h1>Forms & Inputs</h1>
+  <SignupForm />
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import ReactionBlock from './components/ReactionBlock.vue';
-import ResultsDisplay from './components/ResultsDisplay.vue';
-
-let isPlaying = ref(false)
-let showResults = ref(false)
-let delay = null
-let playerResult = null;
-
-function start () {
-  showResults.value = false;
-  playerResult = null;
-  delay = 2000 + Math.random() * 5000;
-  isPlaying.value = true
-}
-
-const handleStopGame = ([reactionTime]) => {
-  playerResult = reactionTime;
-  isPlaying.value = false;
-  showResults.value = true;
-}
+import SignupForm from './components/SignupForm.vue';
 </script>
 
 <style>
